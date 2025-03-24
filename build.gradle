@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // Лучше использовать 17, так как 21 может не поддерживаться в Spring Boot 3.2.2
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Основные зависимости
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-json'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Для взаимодействия с воркерами через RestTemplate
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Для работы с XML (JAXB)
+    //implementation 'org.springframework.boot:spring-boot-starter-xml'
+
+    // Потокобезопасные коллекции (можно использовать для хранения запросов)
+    implementation 'com.google.guava:guava:32.0.0-jre'
+
+    // Библиотека для генерации перестановок (брутфорс)
+    implementation 'com.github.dpaukov:combinatoricslib3:3.3.2'
+
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+
+    // Тестирование
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
